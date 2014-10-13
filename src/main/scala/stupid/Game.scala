@@ -56,13 +56,13 @@ case class Game(
 
     case Phase.Passing =>
       defenceHand.minOfRanks(state.table.ranks) match {
-        case Some(card) if offence.get(state).size > state.table.size + 1 =>
+        case Some(card) if offence.get(state).size > state.table.size =>
           // Passing succeed
           log(s"Passing with $card")
           playCard(card, defence).switch()
 
         case _ =>
-          log("Cannot pass, start defending")
+          log(s"Cannot pass, start defending")
           copy(phase = Phase.Defending)
       }
 
