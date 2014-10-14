@@ -1,6 +1,6 @@
 package stupid
 
-import scalaz.{Ordering, Order}
+import scalaz._, Scalaz._
 
 /**
  * @author alari
@@ -29,12 +29,8 @@ object Card {
         case _ =>
           if(x.rank > y.rank) Ordering.GT
           else if(x.rank < y.rank) Ordering.LT
-          else if(x.suite.toString > y.suite.toString) Ordering.GT
-          else if(x.suite.toString > y.suite.toString) Ordering.LT
-          else Ordering.EQ
+          else x.suite ?|? y.suite
       }
-
-
     }
   }
 
@@ -46,6 +42,4 @@ object Card {
     val rank = Rank.bySymbol(rankCode)
     Card(rank, suite)
   }
-
-
 }
